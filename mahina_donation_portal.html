@@ -1,0 +1,293 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+  .mh-wrap { font-family: 'DM Sans', sans-serif; padding: 1.5rem 0; }
+  .mh-header { text-align: center; margin-bottom: 2rem; }
+  .mh-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; color: var(--color-text-primary); letter-spacing: -0.3px; }
+  .mh-logo span { font-style: italic; color: #c0526a; }
+  .mh-tagline { font-size: 12px; color: var(--color-text-secondary); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+  .mh-divider { width: 40px; height: 2px; background: #c0526a; margin: 12px auto; border-radius: 2px; }
+  .mh-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.5rem; margin-bottom: 1rem; }
+  .mh-section-title { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 1rem; }
+  .mh-qr-area { display: flex; align-items: center; gap: 1.5rem; }
+  .mh-qr-box { width: 110px; height: 110px; border: 1px dashed #c0526a; border-radius: var(--border-radius-md); display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; background: #fff8f9; color: #c0526a; font-size: 11px; text-align: center; gap: 6px; cursor: pointer; position: relative; overflow: hidden; }
+  .mh-qr-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; border-radius: var(--border-radius-md); display: none; }
+  .mh-qr-box.has-qr img { display: block; }
+  .mh-qr-box.has-qr .mh-qr-placeholder { display: none; }
+  .mh-qr-placeholder { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .mh-esewa-info { flex: 1; }
+  .mh-esewa-info h3 { font-size: 16px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 6px; }
+  .mh-esewa-info p { font-size: 13px; color: var(--color-text-secondary); margin: 0 0 10px; line-height: 1.5; }
+  .mh-badge { display: inline-block; background: #fff0f3; color: #c0526a; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 20px; border: 0.5px solid #f4b8c4; }
+  .mh-note { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 14px; font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; border-left: 3px solid #c0526a; margin-top: 8px; }
+  .mh-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mh-field { display: flex; flex-direction: column; gap: 5px; }
+  .mh-field.full { grid-column: 1 / -1; }
+  .mh-label { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); }
+  .mh-field input, .mh-field textarea { font-family: 'DM Sans', sans-serif; font-size: 14px; }
+  .mh-upload-zone { border: 1.5px dashed var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 20px; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; color: var(--color-text-secondary); font-size: 13px; }
+  .mh-upload-zone:hover { border-color: #c0526a; background: #fff8f9; }
+  .mh-upload-zone.active { border-color: #c0526a; background: #fff0f3; }
+  .mh-upload-zone i { font-size: 24px; display: block; margin-bottom: 6px; color: #c0526a; }
+  .mh-btn { background: #c0526a; color: white; border: none; border-radius: var(--border-radius-md); padding: 12px 24px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; width: 100%; margin-top: 4px; transition: background 0.2s, transform 0.1s; }
+  .mh-btn:hover { background: #a8435a; }
+  .mh-btn:active { transform: scale(0.98); }
+  .mh-btn:disabled { background: var(--color-border-tertiary); cursor: not-allowed; }
+  .mh-preview { max-width: 120px; max-height: 80px; border-radius: var(--border-radius-md); object-fit: cover; border: 0.5px solid var(--color-border-tertiary); margin-top: 8px; }
+  .mh-cert-wrap { display: none; }
+  .mh-cert-wrap.visible { display: block; }
+  .mh-cert-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 2rem; text-align: center; position: relative; overflow: hidden; }
+  .mh-cert-deco { position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; border-radius: 50%; background: #fff0f3; opacity: 0.6; }
+  .mh-cert-deco2 { position: absolute; bottom: -40px; left: -20px; width: 100px; height: 100px; border-radius: 50%; background: #fff0f3; opacity: 0.4; }
+  .mh-cert-title { font-family: 'Playfair Display', serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #c0526a; margin-bottom: 6px; }
+  .mh-cert-heading { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+  .mh-cert-sub { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 1.5rem; }
+  .mh-cert-name { font-family: 'Playfair Display', serif; font-size: 28px; font-style: italic; color: #c0526a; margin: 0.5rem 0; }
+  .mh-cert-body { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; max-width: 380px; margin: 0 auto 1.5rem; }
+  .mh-cert-amount { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+  .mh-cert-amount span { font-size: 13px; color: var(--color-text-secondary); }
+  .mh-cert-meta { display: flex; justify-content: center; gap: 2rem; margin: 1.2rem 0; padding: 1rem 0; border-top: 0.5px solid var(--color-border-tertiary); border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .mh-cert-meta-item { text-align: center; }
+  .mh-cert-meta-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: 3px; }
+  .mh-cert-meta-val { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+  .mh-cert-seal { width: 56px; height: 56px; border-radius: 50%; background: #fff0f3; border: 2px solid #f4b8c4; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 22px; }
+  .mh-cert-footer { font-size: 11px; color: var(--color-text-secondary); letter-spacing: 0.5px; margin-top: 1rem; }
+  .mh-dl-btn { background: transparent; color: #c0526a; border: 1px solid #f4b8c4; border-radius: var(--border-radius-md); padding: 10px 20px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; margin-top: 1rem; transition: background 0.2s; }
+  .mh-dl-btn:hover { background: #fff0f3; }
+  .mh-success-bar { background: #e8f7ee; color: #1d7a46; font-size: 13px; padding: 10px 16px; border-radius: var(--border-radius-md); margin-bottom: 1rem; display: none; align-items: center; gap: 8px; }
+  .mh-success-bar.show { display: flex; }
+  .mh-qr-upload { display: none; }
+  #qrHint { font-size: 11px; color: var(--color-text-secondary); margin-top: 6px; text-align: center; }
+  canvas { display: none; }
+</style>
+
+<div class="mh-wrap">
+  <div class="mh-header">
+    <div class="mh-logo">Project <span>Mahina</span></div>
+    <div class="mh-tagline">Donation Portal</div>
+    <div class="mh-divider"></div>
+  </div>
+
+  <div class="mh-card">
+    <div class="mh-section-title">Step 1 — Donate via eSewa</div>
+    <div class="mh-qr-area">
+      <div><img id="qrImg" src="esewa-qr.jpg" alt="eSewa QR Code" /></div>
+      <input type="file" id="qrUpload" class="mh-qr-upload" accept="image/*" />
+      <div class="mh-esewa-info">
+        <h3>Scan &amp; pay on eSewa</h3>
+        <p>Open your eSewa app, tap "Scan QR" and complete the payment. Take a screenshot once it confirms.</p>
+        <span class="mh-badge"><i class="ti ti-shield-check" aria-hidden="true"></i> eSewa · Secure</span>
+        <div class="mh-note">After paying, fill the form below and upload your payment screenshot to receive your donation certificate.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mh-card">
+    <div class="mh-section-title">Step 2 — Submit your details</div>
+    <div class="mh-success-bar" id="successBar">
+      <i class="ti ti-circle-check" aria-hidden="true"></i> Details received! Scroll down to view your certificate.
+    </div>
+    <div class="mh-form-grid">
+      <div class="mh-field">
+        <label class="mh-label" for="donorName">Your name</label>
+        <input type="text" id="donorName" placeholder="e.g. Priya Sharma" />
+      </div>
+      <div class="mh-field">
+        <label class="mh-label" for="donorEmail">Email address</label>
+        <input type="email" id="donorEmail" placeholder="you@email.com" />
+      </div>
+      <div class="mh-field">
+        <label class="mh-label" for="donorAmount">Amount donated (NPR)</label>
+        <input type="number" id="donorAmount" placeholder="e.g. 500" min="1" />
+      </div>
+      <div class="mh-field">
+        <label class="mh-label" for="donorDate">Date of donation</label>
+        <input type="date" id="donorDate" />
+      </div>
+      <div class="mh-field full">
+        <label class="mh-label">Payment screenshot</label>
+        <div class="mh-upload-zone" id="uploadZone" onclick="document.getElementById('ssUpload').click()">
+          <i class="ti ti-photo-up" aria-hidden="true"></i>
+          Click to upload your eSewa payment screenshot
+          <input type="file" id="ssUpload" style="display:none" accept="image/*" />
+        </div>
+        <img id="ssPreview" class="mh-preview" style="display:none" alt="Screenshot preview" />
+      </div>
+    </div>
+    <button class="mh-btn" id="submitBtn" onclick="handleSubmit()">
+      <i class="ti ti-certificate" aria-hidden="true"></i> Generate my certificate
+    </button>
+  </div>
+
+  <div class="mh-cert-wrap" id="certWrap">
+    <div class="mh-card">
+      <div class="mh-section-title">Your donation certificate</div>
+      <div class="mh-cert-card" id="certCard">
+        <div class="mh-cert-deco"></div>
+        <div class="mh-cert-deco2"></div>
+        <div class="mh-cert-seal">🌸</div>
+        <div class="mh-cert-title">Certificate of Donation</div>
+        <div class="mh-cert-heading">Project Mahina</div>
+        <div class="mh-cert-sub">Empowering Girls · Ending Period Poverty</div>
+        <div class="mh-cert-body">This certificate is proudly presented to</div>
+        <div class="mh-cert-name" id="certName">—</div>
+        <div class="mh-cert-body">in gratitude for their generous contribution towards menstrual health, education, and dignity for girls in rural Nepal.</div>
+        <div class="mh-cert-amount" id="certAmount">NPR 0 <span>donated</span></div>
+        <div class="mh-cert-meta">
+          <div class="mh-cert-meta-item">
+            <div class="mh-cert-meta-label">Date</div>
+            <div class="mh-cert-meta-val" id="certDate">—</div>
+          </div>
+          <div class="mh-cert-meta-item">
+            <div class="mh-cert-meta-label">Via</div>
+            <div class="mh-cert-meta-val">eSewa</div>
+          </div>
+          <div class="mh-cert-meta-item">
+            <div class="mh-cert-meta-label">Initiative</div>
+            <div class="mh-cert-meta-val">Project Mahina</div>
+          </div>
+        </div>
+        <div class="mh-cert-footer">Youth-Led · Rural Nepal · projectmahina.org</div>
+      </div>
+      <button class="mh-dl-btn" onclick="downloadCert()">
+        <i class="ti ti-download" aria-hidden="true"></i> Download certificate
+      </button>
+    </div>
+  </div>
+</div>
+
+<canvas id="certCanvas"></canvas>
+
+<script>
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('donorDate').value = today;
+
+  document.getElementById('ssUpload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const prev = document.getElementById('ssPreview');
+      prev.src = ev.target.result;
+      prev.style.display = 'block';
+      document.getElementById('uploadZone').classList.add('active');
+    };
+    reader.readAsDataURL(file);
+  });
+
+  document.getElementById('qrUpload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const img = document.getElementById('qrImg');
+      img.src = ev.target.result;
+      document.getElementById('qrBox').classList.add('has-qr');
+      document.getElementById('qrHint').textContent = 'QR uploaded. Donors can now scan this code.';
+    };
+    reader.readAsDataURL(file);
+  });
+
+  function handleSubmit() {
+    const name = document.getElementById('donorName').value.trim();
+    const email = document.getElementById('donorEmail').value.trim();
+    const amount = document.getElementById('donorAmount').value.trim();
+    const date = document.getElementById('donorDate').value;
+
+    if (!name || !email || !amount || !date) {
+      alert('Please fill in all fields before generating your certificate.');
+      return;
+    }
+
+    const dateFormatted = new Date(date + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    document.getElementById('certName').textContent = name;
+    document.getElementById('certAmount').innerHTML = `NPR ${parseInt(amount).toLocaleString()} <span>donated</span>`;
+    document.getElementById('certDate').textContent = dateFormatted;
+
+    document.getElementById('certWrap').classList.add('visible');
+    document.getElementById('successBar').classList.add('show');
+    document.getElementById('certWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function downloadCert() {
+    const name = document.getElementById('donorName').value.trim() || 'Donor';
+    const amount = document.getElementById('donorAmount').value.trim() || '0';
+    const date = document.getElementById('donorDate').value;
+    const dateFormatted = new Date(date + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    const canvas = document.getElementById('certCanvas');
+    canvas.width = 800;
+    canvas.height = 520;
+    const ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, 800, 520);
+
+    ctx.fillStyle = '#fff0f3';
+    ctx.beginPath(); ctx.arc(760, -20, 130, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(40, 490, 100, 0, Math.PI * 2); ctx.fill();
+
+    ctx.strokeStyle = '#f4b8c4';
+    ctx.lineWidth = 6;
+    ctx.strokeRect(18, 18, 764, 484);
+    ctx.strokeStyle = '#fde8ec';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(26, 26, 748, 468);
+
+    ctx.fillStyle = '#fff0f3';
+    ctx.beginPath(); ctx.arc(400, 95, 34, 0, Math.PI * 2); ctx.fill();
+    ctx.font = '28px serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('🌸', 400, 106);
+
+    ctx.fillStyle = '#c0526a';
+    ctx.font = '500 11px "DM Sans", sans-serif';
+    ctx.letterSpacing = '3px';
+    ctx.fillText('CERTIFICATE OF DONATION', 400, 148);
+
+    ctx.fillStyle = '#1a1a1a';
+    ctx.font = '500 26px "Playfair Display", serif';
+    ctx.fillText('Project Mahina', 400, 184);
+
+    ctx.fillStyle = '#888';
+    ctx.font = '13px "DM Sans", sans-serif';
+    ctx.fillText('Empowering Girls · Ending Period Poverty', 400, 206);
+
+    ctx.fillStyle = '#444';
+    ctx.font = '14px "DM Sans", sans-serif';
+    ctx.fillText('This certificate is proudly presented to', 400, 246);
+
+    ctx.fillStyle = '#c0526a';
+    ctx.font = 'italic 36px "Playfair Display", serif';
+    ctx.fillText(name, 400, 294);
+
+    ctx.fillStyle = '#444';
+    ctx.font = '13px "DM Sans", sans-serif';
+    ctx.fillText('in gratitude for their generous contribution towards menstrual health,', 400, 330);
+    ctx.fillText('education, and dignity for girls in rural Nepal.', 400, 350);
+
+    ctx.fillStyle = '#1a1a1a';
+    ctx.font = '500 22px "DM Sans", sans-serif';
+    ctx.fillText(`NPR ${parseInt(amount).toLocaleString()} donated`, 400, 390);
+
+    ctx.strokeStyle = '#f4b8c4';
+    ctx.lineWidth = 0.5;
+    ctx.beginPath(); ctx.moveTo(80, 418); ctx.lineTo(720, 418); ctx.stroke();
+
+    ctx.fillStyle = '#888';
+    ctx.font = '12px "DM Sans", sans-serif';
+    ctx.fillText(`${dateFormatted}   ·   Via eSewa   ·   Youth-Led Initiative · Rural Nepal`, 400, 445);
+
+    ctx.fillStyle = '#c0526a';
+    ctx.font = '11px "DM Sans", sans-serif';
+    ctx.fillText('projectmahina.org  ·  Made with ♥ by teenage girls who refused to stay silent.', 400, 480);
+
+    canvas.toBlob(blob => {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `ProjectMahina_Certificate_${name.replace(/\s+/g,'_')}.png`;
+      a.click();
+    });
+  }
+</script>
