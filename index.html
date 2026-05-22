@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Mahina — Empowering Girls. Ending Period Poverty.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --rose: #c2185b;
+    --rose-light: #f8bbd0;
+    --rose-pale: #fce4ec;
+    --rose-deep: #880e4f;
+    --mauve: #ad1457;
+    --blush: #fdf0f4;
+    --petal: #f9d8e6;
+    --cream: #fff8f5;
+    --text: #2d1a23;
+    --text-muted: #7a4a5e;
+    --text-light: #b07a90;
+    --white: #ffffff;
+    --border: rgba(194, 24, 91, 0.15);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(253, 240, 244, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--rose-deep);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--rose); }
+
+  .nav-cta {
+    background: var(--rose);
+    color: white !important;
+    padding: 0.45rem 1.2rem;
+    border-radius: 999px;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--rose-deep) !important; color: white !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 7rem 2rem 5rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, var(--blush) 0%, var(--cream) 60%);
+  }
+
+  .hero-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--rose-pale);
+    opacity: 0.5;
+  }
+
+  .hero-bg-circle.c1 { width: 600px; height: 600px; top: -200px; right: -150px; }
+  .hero-bg-circle.c2 { width: 300px; height: 300px; bottom: -100px; left: -80px; }
+
+  .hero-content { position: relative; z-index: 1; max-width: 780px; }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--petal);
+    color: var(--rose);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--rose-light);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.2rem);
+    line-height: 1.1;
+    color: var(--rose-deep);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--rose);
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--rose);
+    color: white;
+    padding: 0.9rem 2.2rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--rose-deep); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--rose);
+    padding: 0.9rem 2.2rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1.5px solid var(--rose-light);
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { border-color: var(--rose); background: var(--blush); transform: translateY(-2px); }
+
+  .hero-quote {
+    margin-top: 3.5rem;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text-light);
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  /* ABOUT */
+  .section {
+    padding: 6rem 2rem;
+  }
+
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--rose-deep);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-body {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 620px;
+    line-height: 1.8;
+  }
+
+  /* ABOUT SPLIT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .nav-links { display: none; }
+  }
+
+  .about-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .about-card-bg {
+    width: 320px;
+    height: 380px;
+    background: var(--rose-pale);
+    border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .about-icon-wrap {
+    text-align: center;
+  }
+
+  .about-icon-wrap svg {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1rem;
+  }
+
+  .about-icon-wrap p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--rose-deep);
+    max-width: 200px;
+    line-height: 1.5;
+  }
+
+  .floating-badge {
+    position: absolute;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    box-shadow: 0 4px 20px rgba(194, 24, 91, 0.08);
+  }
+
+  .fb1 { top: 20px; right: -10px; }
+  .fb2 { bottom: 40px; left: -10px; }
+
+  /* WHAT WE DO */
+  .goals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .goal-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.8rem;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .goal-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(194, 24, 91, 0.1);
+  }
+
+  .goal-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--blush);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.1rem;
+    font-size: 1.4rem;
+  }
+
+  .goal-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--rose-deep);
+    margin-bottom: 0.5rem;
+  }
+
+  .goal-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* HOW TO HELP */
+  .help-section {
+    background: var(--blush);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .help-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .help-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.8rem 1.5rem;
+    text-align: center;
+    border: 1px solid var(--border);
+    transition: transform 0.25s;
+  }
+
+  .help-card:hover { transform: translateY(-4px); }
+
+  .help-card .icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .help-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--rose-deep);
+    margin-bottom: 0.4rem;
+  }
+
+  .help-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* DONATE */
+  .donate-section {
+    background: var(--rose-deep);
+    color: white;
+    text-align: center;
+    padding: 6rem 2rem;
+  }
+
+  .donate-section .section-label { color: var(--rose-light); }
+
+  .donate-section .section-title { color: white; }
+
+  .donate-section p {
+    color: rgba(255,255,255,0.75);
+    font-size: 1.05rem;
+    max-width: 540px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .donate-amounts {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .amount-btn {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .amount-btn:hover, .amount-btn.active {
+    background: rgba(255,255,255,0.25);
+    border-color: rgba(255,255,255,0.5);
+  }
+
+  .donate-form-row {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    max-width: 440px;
+    margin: 0 auto 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .donate-input {
+    flex: 1;
+    min-width: 180px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 0.8rem 1.2rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    outline: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .donate-input::placeholder { color: rgba(255,255,255,0.5); }
+
+  .btn-donate {
+    background: white;
+    color: var(--rose-deep);
+    padding: 0.8rem 2rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-donate:hover { transform: translateY(-2px); background: var(--rose-pale); }
+
+  .donate-note {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.45);
+    margin-top: 1.25rem;
+  }
+
+  /* TEAM */
+  .team-section {
+    background: var(--cream);
+    text-align: center;
+    padding: 6rem 2rem;
+  }
+
+  .team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .team-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.5rem 1.2rem;
+    width: 160px;
+    text-align: center;
+    transition: transform 0.25s;
+  }
+
+  .team-card:hover { transform: translateY(-5px); }
+
+  .avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--petal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--rose);
+    margin: 0 auto 0.75rem;
+  }
+
+  .team-card h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--rose-deep);
+    margin-bottom: 0.25rem;
+  }
+
+  .team-card span {
+    font-size: 0.78rem;
+    color: var(--text-light);
+  }
+
+  /* STATS */
+  .stats-bar {
+    background: var(--petal);
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stats-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .stat-item { flex: 1; min-width: 140px; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: var(--rose);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--text);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 2.5rem 2rem;
+    font-size: 0.875rem;
+  }
+
+  footer strong { color: white; }
+
+  footer .footer-heart { color: var(--rose-light); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Project Mahina</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#what-we-do">What We Do</a></li>
+    <li><a href="#help">How to Help</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#donate" class="nav-cta">Donate</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">✦ Youth-Led Initiative · Rural Nepal</div>
+    <h1>Empowering Girls.<br><em>Ending Period Poverty.</em></h1>
+    <p class="hero-sub">A youth-led movement breaking the silence and stigma around menstruation — so every girl can learn, grow, and live with dignity.</p>
+    <div class="hero-actions">
+      <a href="#donate" class="btn-primary">Support Our Mission</a>
+      <a href="#about" class="btn-outline">Learn More</a>
+    </div>
+    <p class="hero-quote">"Every girl deserves to learn, grow and live with dignity."</p>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item reveal">
+      <div class="stat-num">200+</div>
+      <div class="stat-label">Girls Educated</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">12+</div>
+      <div class="stat-label">Communities Reached</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Supplies Distributed</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Youth-Led</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="section-label">Who We Are</div>
+        <h2 class="section-title">A movement born from empathy and courage</h2>
+        <p class="section-body">Project Mahina is a youth-led initiative aimed at breaking the silence and stigma around menstruation in rural Nepal. Founded by young people who believe change starts from within communities, we work to ensure every girl has the knowledge, resources, and safe space she deserves.</p>
+        <br>
+        <p class="section-body" style="margin-top: 1rem;">We believe that every girl deserves accurate knowledge, proper resources, and a safe space to grow with confidence and dignity — regardless of where she was born.</p>
+      </div>
+      <div class="about-visual reveal">
+        <div class="about-card-bg">
+          <div class="about-icon-wrap">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="60" cy="40" r="22" fill="#f48fb1" opacity="0.6"/>
+              <circle cx="40" cy="70" r="14" fill="#c2185b" opacity="0.5"/>
+              <circle cx="80" cy="70" r="14" fill="#c2185b" opacity="0.5"/>
+              <circle cx="60" cy="90" r="14" fill="#ad1457" opacity="0.4"/>
+              <path d="M50 55 Q60 75 70 55" stroke="#880e4f" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+            <p>"Together, let's make every month a step towards empowerment."</p>
+          </div>
+        </div>
+        <div class="floating-badge fb1">🌸 Youth-Led</div>
+        <div class="floating-badge fb2">💛 Rural Nepal</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="section" id="what-we-do" style="background: white; border-top: 1px solid var(--border);">
+  <div class="section-inner">
+    <div class="reveal" style="text-align: center; margin-bottom: 1rem;">
+      <div class="section-label">Our Mission</div>
+      <h2 class="section-title">What Project Mahina is doing</h2>
+    </div>
+    <div class="goals-grid">
+      <div class="goal-card reveal">
+        <div class="goal-icon">📚</div>
+        <h3>Educate</h3>
+        <p>We conduct interactive sessions to educate young girls about menstruation, the body, and menstrual hygiene — in a safe, open, and supportive environment.</p>
+      </div>
+      <div class="goal-card reveal">
+        <div class="goal-icon">🎀</div>
+        <h3>Provide Resources</h3>
+        <p>We collect funds to distribute cloth pads, sanitary pads, and other essential items to girls who lack access to basic menstrual care products.</p>
+      </div>
+      <div class="goal-card reveal">
+        <div class="goal-icon">💬</div>
+        <h3>Break the Stigma</h3>
+        <p>We create safe spaces for open conversations and actively work towards changing the deep-rooted cultural taboos surrounding menstruation.</p>
+      </div>
+      <div class="goal-card reveal">
+        <div class="goal-icon">🤝</div>
+        <h3>Empower Communities</h3>
+        <p>We involve local volunteers and schools to create a sustainable, community-driven impact that lasts beyond our visits.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO HELP -->
+<section class="section help-section" id="help">
+  <div class="section-inner">
+    <div class="reveal" style="text-align: center;">
+      <div class="section-label">Take Action</div>
+      <h2 class="section-title">How you can help</h2>
+      <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto; font-size: 1rem;">Small actions create big change. Here's how you can be part of this movement.</p>
+    </div>
+    <div class="help-grid">
+      <div class="help-card reveal">
+        <div class="icon">❤️</div>
+        <h3>Donate</h3>
+        <p>Your donations help us provide educational materials and menstrual products to girls in need.</p>
+      </div>
+      <div class="help-card reveal">
+        <div class="icon">👕</div>
+        <h3>Donate Supplies</h3>
+        <p>Contribute pads, cloth, underwear, or other essential items directly to communities.</p>
+      </div>
+      <div class="help-card reveal">
+        <div class="icon">📢</div>
+        <h3>Spread Awareness</h3>
+        <p>Talk about periods. Break the stigma. Be a voice for change in your own community.</p>
+      </div>
+      <div class="help-card reveal">
+        <div class="icon">🌿</div>
+        <h3>Volunteer</h3>
+        <p>Join us in workshops, awareness campaigns, and community visits across rural Nepal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DONATE -->
+<!-- <section class="donate-section" id="donate">
+  <div class="section-label">Make a Difference</div>
+  <h2 class="section-title" style="margin-bottom: 1rem;">Support a girl's dignity today</h2>
+  <p>Every rupee goes directly toward education and supplies for girls in rural Nepal. No overhead, no middlemen — just impact.</p>
+  <div class="donate-amounts">
+    <button class="amount-btn" onclick="setAmount(500)">NPR 500</button>
+    <button class="amount-btn active" onclick="setAmount(1000)">NPR 1,000</button>
+    <button class="amount-btn" onclick="setAmount(2500)">NPR 2,500</button>
+    <button class="amount-btn" onclick="setAmount(5000)">NPR 5,000</button>
+  </div>
+  <div class="donate-form-row">
+    <input type="number" id="custom-amount" class="donate-input" placeholder="Custom amount (NPR)" />
+    <button class="btn-donate" onclick="handleDonate()">Donate Now</button>
+  </div>
+  <p class="donate-note">* Secure donation. 100% goes toward menstrual health supplies and education programs.</p>
+</section> -->
+
+<!-- TEAM -->
+<section class="team-section" id="team">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">The People Behind It</div>
+      <h2 class="section-title">Our team of young changemakers</h2>
+      <p style="color: var(--text-muted); max-width: 480px; margin: 0.75rem auto 0; font-size: 1rem;">A group of passionate Grade 12 graduates from Nepal who believe period poverty shouldn't define anyone's future.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="avatar">D</div>
+        <h4>Dikshya</h4>
+        <span>Co-Founder</span>
+      </div>
+      <div class="team-card reveal">
+        <div class="avatar">A</div>
+        <h4>Aishwarya</h4>
+        <span>Co-Founder</span>
+      </div>
+      <div class="team-card reveal">
+        <div class="avatar">A</div>
+        <h4>Apeksha</h4>
+        <span>Co-Founder</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Project Mahina</strong> — Together, let's make every month a step towards empowerment.</p>
+  <p style="margin-top: 0.5rem;">Made with <span class="footer-heart">♥</span> by a group of teenage girls who refused to stay silent.</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Donate amount buttons
+  function setAmount(val) {
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('custom-amount').value = val;
+  }
+
+  function handleDonate() {
+    const amount = document.getElementById('custom-amount').value;
+    if (!amount || amount < 1) {
+      alert('Please enter or select an amount first.');
+      return;
+    }
+    alert('Thank you for your generosity! Payment integration coming soon.\n\nYour intended donation: NPR ' + parseInt(amount).toLocaleString() + '\n\nPlease reach out to us directly on social media to complete your donation.');
+  }
+</script>
+</body>
+</html>
