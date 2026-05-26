@@ -1,11 +1,30 @@
 
 <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose:     #e8647a;
+      --blush:    #fce8ec;
+      --petal:    #fdf3f5;
+      --mauve:    #c94f67;
+      --cream:    #fffaf8;
+      --text:     #2d1f24;
+      --muted:    #8a6670;
+      --border:   #f0d5da;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+    }
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap');
   .mh-wrap { font-family: 'DM Sans', sans-serif; padding: 1.5rem 0; }
   .mh-header { text-align: center; margin-bottom: 2rem; }
   .mh-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; color: var(--color-text-primary); letter-spacing: -0.3px; }
   .mh-logo span { font-style: italic; color: #c0526a; }
-  .mh-tagline { font-size: 12px; color: var(--color-text-secondary); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+  .mh-tagline { font-size: 24px; color: var(--color-text-secondary); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
   .mh-divider { width: 40px; height: 2px; background: #c0526a; margin: 12px auto; border-radius: 2px; }
   .mh-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.5rem; margin-bottom: 1rem; }
   .mh-section-title { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 1rem; }
@@ -59,30 +78,66 @@
   .mh-qr-upload { display: none; }
   #qrHint { font-size: 11px; color: var(--color-text-secondary); margin-top: 6px; text-align: center; }
   canvas { display: none; }
+  nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 2.5rem;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--rose);
+      text-decoration: none;
+    }
+    .nav-back {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--rose); }
+    .det{
+  font-size: 20px;
+  color:  #c0526a;
+    }
 </style>
-
+ <nav>
+    <a href="index.html" class="nav-logo">🌸 Project Mahina</a>
+    <a href="index.html" class="nav-back">← Back to home</a>
+  </nav>
 <div class="mh-wrap">
   <div class="mh-header">
-    <div class="mh-logo">Project <span>Mahina</span></div>
     <div class="mh-tagline">Donation Portal</div>
     <div class="mh-divider"></div>
   </div>
 
   <div class="mh-card">
-    <div class="mh-section-title">Step 1 — Donate via eSewa</div>
+    <div class="mh-section-title">Step 1 — Donate via Online Banking</div>
     <div class="mh-qr-area">
-      <div><img id="qrImg" src="esewa-qr.jpg" alt="eSewa QR Code" /></div>
+      <div><img id="qrImg" src="esewa-qr.JPG" alt=" QR Code" ></div>
       <input type="file" id="qrUpload" class="mh-qr-upload" accept="image/*" />
       <div class="mh-esewa-info">
-        <h3>Scan &amp; pay on eSewa</h3>
-        <p>Open your eSewa app, tap "Scan QR" and complete the payment. Take a screenshot once it confirms.</p>
-        <span class="mh-badge"><i class="ti ti-shield-check" aria-hidden="true"></i> eSewa · Secure</span>
+        <h3>Scan &amp; pay on any Online Banking App</h3>
+        <p>Open your preferred online banking app, tap "Scan QR" and complete the payment. Take a screenshot once it confirms.</p>
+        <span class="mh-badge"><i class="ti ti-shield-check" aria-hidden="true"></i> Secure</span>
         <div class="mh-note">After paying, fill the form below and upload your payment screenshot to receive your donation certificate.</div>
       </div>
     </div>
+    <div class="det">Dikshya Poudel<br>Sarbashrestha Sahaj Bachat Khata<br>0165751754700001</div>
   </div>
 
   <div class="mh-card">
+    
     <div class="mh-section-title">Step 2 — Submit your details</div>
     <div class="mh-success-bar" id="successBar">
       <i class="ti ti-circle-check" aria-hidden="true"></i> Details received! Scroll down to view your certificate.

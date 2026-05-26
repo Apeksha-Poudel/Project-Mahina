@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Volunteer — Project Mahina</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose:     #e8647a;
+      --blush:    #fce8ec;
+      --petal:    #fdf3f5;
+      --mauve:    #c94f67;
+      --cream:    #fffaf8;
+      --text:     #2d1f24;
+      --muted:    #8a6670;
+      --border:   #f0d5da;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 2.5rem;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--rose);
+      text-decoration: none;
+    }
+    .nav-back {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--rose); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #fdf3f5 0%, #fce8ec 50%, #fff8f0 100%);
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '🌿';
+      position: absolute;
+      font-size: 8rem;
+      opacity: 0.08;
+      top: -0.5rem;
+      right: 2rem;
+      transform: rotate(15deg);
+    }
+    .hero::after {
+      content: '🤝';
+      position: absolute;
+      font-size: 6rem;
+      opacity: 0.07;
+      bottom: -1rem;
+      left: 1rem;
+      transform: rotate(-10deg);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--rose);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.2;
+      margin-bottom: 0.8rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--rose); }
+    .hero p {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── MAIN ── */
+    .main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    /* ── ROLES GRID ── */
+    .roles-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.3rem;
+      text-align: center;
+    }
+    .roles-sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 2rem;
+    }
+    .roles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .role-card {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .role-card:hover { border-color: var(--rose); transform: translateY(-2px); }
+    .role-emoji { font-size: 2rem; margin-bottom: 0.6rem; }
+    .role-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .role-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── TWO COLUMN ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 680px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* ── FORM CARD ── */
+    .form-card {
+      background: linear-gradient(135deg, #fce8ec, #fff8f0);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2.2rem;
+    }
+    .form-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      margin-bottom: 0.3rem;
+    }
+    .form-card .subtitle {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.6rem;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    label { font-size: 0.82rem; font-weight: 500; color: var(--text); }
+    input, select, textarea {
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      background: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--rose); }
+    textarea { resize: vertical; min-height: 100px; }
+
+    .avail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+    .avail-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.83rem;
+      cursor: pointer;
+      padding: 0.5rem 0.8rem;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      transition: all 0.15s;
+    }
+    .avail-label input[type="checkbox"] { width: auto; accent-color: var(--rose); }
+    .avail-label:has(input:checked) {
+      border-color: var(--rose);
+      background: var(--blush);
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 1.2rem;
+      background: var(--rose);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 0.95rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .submit-btn:hover { background: var(--mauve); transform: translateY(-1px); }
+
+    .success-msg {
+      display: none;
+      background: #e8f5e9;
+      border: 1px solid #a5d6a7;
+      border-radius: 12px;
+      padding: 1rem;
+      color: #2e7d32;
+      font-size: 0.88rem;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    /* ── CONTACT SIDEBAR ── */
+    .contact-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2rem;
+    }
+    .contact-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.3rem;
+    }
+    .contact-card .subtitle {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      margin-bottom: 0.7rem;
+      background: var(--petal);
+      transition: all 0.2s;
+    }
+    .contact-link:hover {
+      border-color: var(--rose);
+      background: var(--blush);
+      transform: translateY(-1px);
+    }
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .icon-email  { background: #fce8ec; }
+    .icon-phone  { background: #e8f5e9; }
+    .icon-ig     { background: #fce4ec; }
+    .icon-tiktok { background: #e8eaf6; }
+    .contact-info strong { display: block; font-size: 0.85rem; font-weight: 500; }
+    .contact-info span   { font-size: 0.78rem; color: var(--muted); }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin: 1.2rem 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">🌸 Project Mahina</a>
+    <a href="index.html" class="nav-back">← Back to home</a>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-badge">🌿 Volunteer</div>
+    <h1>Join the Movement.<br><em>Be the Change.</em></h1>
+    <p>We're looking for passionate young people to help educate, empower, and uplift girls across rural Nepal. Every hour you give matters.</p>
+  </div>
+
+  <div class="main">
+
+    <!-- Volunteer roles -->
+    <h2 class="roles-heading">Ways to Get Involved</h2>
+    <p class="roles-sub">Pick what speaks to you — every role is meaningful</p>
+
+    <div class="roles-grid">
+      <div class="role-card">
+        <div class="role-emoji">📚</div>
+        <h3>Workshop Facilitator</h3>
+        <p>Lead education sessions in schools and communities</p>
+      </div>
+      <div class="role-card">
+        <div class="role-emoji">📦</div>
+        <h3>Supply Distribution</h3>
+        <p>Help pack and distribute menstrual supplies to girls in need</p>
+      </div>
+      <div class="role-card">
+        <div class="role-emoji">📢</div>
+        <h3>Awareness Campaigns</h3>
+        <p>Organise and participate in community awareness drives</p>
+      </div>
+      <div class="role-card">
+        <div class="role-emoji">📸</div>
+        <h3>Social Media & Content</h3>
+        <p>Create content, run campaigns, and grow our online presence</p>
+      </div>
+    </div>
+
+    <!-- Form + Contact -->
+    <div class="two-col">
+
+      <!-- Form -->
+      <!--<div class="form-card">
+        <h2>Apply to Volunteer</h2>
+        <p class="subtitle">Fill this out and we'll reach out to get you started 🌸</p>
+
+        <div class="form-group">
+          <label for="v-name">Full Name *</label>
+          <input type="text" id="v-name" placeholder="Your full name" />
+        </div>
+
+        <div class="form-group">
+          <label for="v-age">Age *</label>
+          <input type="number" id="v-age" placeholder="e.g. 19" min="13" max="35" />
+        </div>
+
+        <div class="form-group">
+          <label for="v-location">Location *</label>
+          <input type="text" id="v-location" placeholder="Your district or city" />
+        </div>
+
+        <div class="form-group">
+          <label>Availability (select all that apply)</label>
+          <div class="avail-grid">
+            <label class="avail-label"><input type="checkbox" value="Weekdays" /> Weekdays</label>
+            <label class="avail-label"><input type="checkbox" value="Weekends" /> Weekends</label>
+            <label class="avail-label"><input type="checkbox" value="School holidays" /> School Holidays</label>
+            <label class="avail-label"><input type="checkbox" value="Flexible" /> Flexible</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="v-why">Why do you want to volunteer? *</label>
+          <textarea id="v-why" placeholder="Tell us a little about yourself and why this cause matters to you…"></textarea>
+        </div>
+
+        <button class="submit-btn" onclick="handleVolunteer()">Submit Application 🌿</button>
+        <div class="success-msg" id="vol-success">
+          ✅ We've received your application! We'll be in touch soon. Thank you for wanting to make a difference. 💛
+        </div>
+      </div>-->
+
+      <!-- Direct contact -->
+      <div class="contact-card">
+        <h2>Prefer to Reach Out?</h2>
+        <p class="subtitle">No forms needed — just talk to us directly.</p>
+
+        <a href="mailto: pdikshya464@gmail.com" class="contact-link">
+          <div class="contact-icon icon-email">📧</div>
+          <div class="contact-info">
+            <strong>Email Us</strong>
+            <span> pdikshya464@gmail.com</span>
+          </div>
+        </a>
+
+        <a href="tel:+9779765166532" class="contact-link">
+          <div class="contact-icon icon-phone">📞</div>
+          <div class="contact-info">
+            <strong>Call or WhatsApp</strong>
+            <span>+977 9765166532</span>
+          </div>
+        </a>
+
+        <div class="divider">or reach us on social</div>
+
+        <a href="https://instagram.com/themahinaproject" target="_blank" class="contact-link">
+          <div class="contact-icon icon-ig">📸</div>
+          <div class="contact-info">
+            <strong>Instagram</strong>
+            <span>@themahinaproject</span>
+          </div>
+        </a>
+
+        <a href="https://tiktok.com/@themahinaproject" target="_blank" class="contact-link">
+          <div class="contact-icon icon-tiktok">🎵</div>
+          <div class="contact-info">
+            <strong>TikTok</strong>
+            <span>@themahinaproject</span>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <strong>Project Mahina</strong> — Together, let's make every month a step towards empowerment.<br />
+    Made with ♥ by a group of girls who refused to stay silent.
+  </footer>
+
+  <script>
+    function handleVolunteer() {
+      const name     = document.getElementById('v-name').value.trim();
+      const age      = document.getElementById('v-age').value.trim();
+      const location = document.getElementById('v-location').value.trim();
+      const why      = document.getElementById('v-why').value.trim();
+
+      if (!name || !age || !location || !why) {
+        alert('Please fill in all required fields (marked with *) before submitting.');
+        return;
+      }
+
+      document.getElementById('vol-success').style.display = 'block';
+      document.querySelector('.submit-btn').disabled = true;
+      document.querySelector('.submit-btn').style.opacity = '0.6';
+    }
+  </script>
+
+</body>
+</html>
