@@ -5,9 +5,9 @@ from pymongo import MongoClient
 app = Flask(__name__)
 CORS(app)
 
-client = MongoClient(
-    "mongodb+srv://poudelapeksha65_db_user:mahina123@projectmahina.feoyx2e.mongodb.net/?appName=Projectmahina"
-)
+import os
+
+client = MongoClient(os.environ.get("MONGO_URI"))
 
 # ✅ Ping test goes HERE — before app.run()
 try:
